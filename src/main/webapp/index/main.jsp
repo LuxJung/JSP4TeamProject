@@ -25,10 +25,6 @@
 	<a href="../join/test.jsp">테스트</a>
 	<a href="../join/deleteForm.jsp">회원탈퇴</a>
 	
-	
-		<img style = "border-radius:50%;" onerror="img/userProfile.jpg'" 
-		src="${sessionScope.userProfile}"  width="40px" height="40px" />
-	
 <% 	
 	}
 	else if(session.getAttribute("sessionID")==null){

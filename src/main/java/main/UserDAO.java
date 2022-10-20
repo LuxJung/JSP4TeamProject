@@ -22,30 +22,21 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
-	public UserVO findUser(String _id) {
-		UserVO userInfo = null;
-		try {
-			conn=dataFactory.getConnection();
-			String query="select * from userT where id=?";
-			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1, _id);
-			System.out.println(query);
-			ResultSet rs=pstmt.executeQuery();
-			rs.next();
-			
-			String id=rs.getString("id");
-			String password=rs.getString("password");
-			String nickname=rs.getString("nickname");
-			String phone_number=rs.getString("phone_number");
-			
-			userInfo=new UserVO(id,password,nickname,phone_number);
-			pstmt.close();
-			conn.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return userInfo;
-	}
+	/*
+	 * public UserVO findUser(String _id) { UserVO userInfo = null; try {
+	 * conn=dataFactory.getConnection(); String
+	 * query="select * from userT where id=?"; pstmt=conn.prepareStatement(query);
+	 * pstmt.setString(1, _id); System.out.println(query); ResultSet
+	 * rs=pstmt.executeQuery(); rs.next();
+	 * 
+	 * String id=rs.getString("id"); String password=rs.getString("password");
+	 * String nickname=rs.getString("nickname"); String
+	 * phone_number=rs.getString("phone_number");
+	 * 
+	 * userInfo=new UserVO(id,password,nickname,phone_number); pstmt.close();
+	 * conn.close(); } catch (Exception e) { e.printStackTrace(); } return userInfo;
+	 * }
+	 */
 	
 	
 	public int login(String id, String password) {
@@ -114,5 +105,28 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int checkId(String id) {
+		int idCheck=0;
+		try {
+			conn = dataFactory.getConnection();
+			String query="select * from user_T where id=?"; 
+			System.out.println("prepareStatement: " + query);
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next()||id.equals("")) {
+				idCheck=0; //이미 존재하는 경우, 생성 불가능
+			}else {
+				idCheck=1; //존재하지 않는 경우, 생성 가능
+			}
+			conn.close();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return idCheck;
 	}
 }

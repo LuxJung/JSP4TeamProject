@@ -1,10 +1,12 @@
 package main;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,10 +54,14 @@ public class UserController extends HttpServlet {
 			UserVO userVO = new UserVO(id, password, nickname, phone_number);
 			userDAO.addMember(userVO);
 			nextPage="../index/main.jsp";
+			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
+			dispatch.forward(request, response);
 			
 		}else if(action.equals("/login.do")) {
 			String id=request.getParameter("id");
 			String password=request.getParameter("password");
+			String checkbox=request.getParameter("checkbox");
+			
 			
 			System.out.println(id);
 			System.out.println(password);
@@ -68,6 +74,7 @@ public class UserController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("sessionID", id);
 				session.setMaxInactiveInterval(20*60);
+//	            response.sendRedirect(request.getContextPath()+"/");
 				
 				System.out.println(session.getAttribute("sessionID"));
 				nextPage="../index/main.jsp";
@@ -75,6 +82,8 @@ public class UserController extends HttpServlet {
 				request.setAttribute("loginResult", loginResult);
 				nextPage="../login/loginForm.jsp";
 			}
+			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
+			dispatch.forward(request, response);
 		}else if(action.equals("/deleteUser.do")) {
 			
 			String id=request.getParameter("id");
@@ -91,14 +100,29 @@ public class UserController extends HttpServlet {
 				RequestDispatcher dis = request.getRequestDispatcher("deleteForm.jsp");
 				dis.forward(request, response);
 			}
-		}else if(action.equals("/pictureUp.do")) {
+			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
+			dispatch.forward(request, response);
+		}else if(action.equals("/overlapChk.do")) {
+			String userId=request.getParameter("userId");
+			System.out.println("userId="+userId);
+			PrintWriter out = response.getWriter();
+			
+			UserDAO userDAO = new UserDAO();
+			
+			int idCheck=userDAO.checkId(userId);
+			System.out.println("idCheck="+idCheck);
+			
+			//개발자용 성공여부 확인
+			if(idCheck==0) {
+				System.out.println("이미 존재하는 아이디입니다.");
+			}else if(idCheck==1) {
+				System.out.println("사용 가능한 아이디입니다.");
+			}
 			
 			
+			out.write(idCheck+""); //->ajax결과값인 result가 됨.
+			//-->String으로 값을 내보낼 수 있도록 +"" 를 해준다.
 		}
-		
-		
-		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
-		dispatch.forward(request, response);
 		
 	}
 	
