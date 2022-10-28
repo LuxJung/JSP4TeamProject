@@ -75,11 +75,8 @@ class MyAuthentication extends Authenticator {
     public MyAuthentication(){
          
         String id = "jsh00999";  //네이버 이메일 아이디
-<<<<<<< HEAD
         String pw = ""//네이버 비밀번호
-=======
-        String pw = "jilw3187088!"; //네이버 비밀번호
->>>>>>> bb314e3f36b9ef81f0b2f3c49674b5a101c742b0
+
  
         // ID와 비밀번호를 입력한다.
         pa = new PasswordAuthentication(id, pw);
