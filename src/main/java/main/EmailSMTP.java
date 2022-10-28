@@ -20,11 +20,11 @@ public class EmailSMTP {
     	String mailnumber;
          
         Properties p = System.getProperties();
-        p.put("mail.smtp.starttls.enable", "true");     // gmail은 true 고정
-        p.put("mail.smtp.host", "smtp.naver.com");      // smtp 서버 주소
-        p.put("mail.smtp.auth","true");                 // gmail은 true 고정
-        p.put("mail.smtp.port", "587");                 // 네이버 포트
-        p.put("mail.smtp.port", "587");                 // 네이버 포트
+        p.put("mail.smtp.starttls.enable", "true");     
+        p.put("mail.smtp.host", "smtp.naver.com");      
+        p.put("mail.smtp.auth","true");                 
+        p.put("mail.smtp.port", "587");                
+        p.put("mail.smtp.port", "587");                
            
         Authenticator auth = new MyAuthentication();
         //session 생성 및  MimeMessage생성
@@ -46,7 +46,7 @@ public class EmailSMTP {
             InternetAddress to = new InternetAddress(emailAdr);
             msg.setRecipient(Message.RecipientType.TO, to);
             // 이메일 제목
-            msg.setSubject("메일 전송 테스트", "UTF-8");
+            msg.setSubject("BestSeller 인증번호 확인 메일입니다.", "UTF-8");
             // 이메일 내용
             msg.setText(numberMsg, "UTF-8");
             // 이메일 헤더
@@ -74,8 +74,8 @@ class MyAuthentication extends Authenticator {
     PasswordAuthentication pa;
     public MyAuthentication(){
          
-        String id = "";  //네이버 이메일 아이디
-        String pw = "";        //네이버 비밀번호
+        String id = "jsh00999";  //네이버 이메일 아이디
+        String pw = "jilw3187088!"; //네이버 비밀번호
  
         // ID와 비밀번호를 입력한다.
         pa = new PasswordAuthentication(id, pw);
