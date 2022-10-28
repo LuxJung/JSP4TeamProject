@@ -6,13 +6,31 @@ public class UserVO {
 	private String password;
 	private String nickname;
 	private String phone_number;
+<<<<<<< HEAD
 	
 	public UserVO(String id, String password, String nickname, String phone_number) {
 		super();
+=======
+	private String profile_img;
+	private String addr;
+	private String detail_addr;
+	
+	public UserVO() {
+		
+	}
+	
+	public UserVO(String id, String password, String nickname, String phone_number,String profile_img,String addr,String detail_addr) {
+>>>>>>> minji
 		this.id = id;
 		this.password = password;
 		this.nickname = nickname;
 		this.phone_number = phone_number;
+<<<<<<< HEAD
+=======
+		this.profile_img = profile_img;
+		this.addr=addr;
+		this.detail_addr=detail_addr;
+>>>>>>> minji
 	}
 
 	public String getId() {
@@ -48,6 +66,37 @@ public class UserVO {
 	}
 	
 	
+<<<<<<< HEAD
+=======
+
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getDetail_addr() {
+		return detail_addr;
+	}
+
+	public void setDetail_addr(String detail_addr) {
+		this.detail_addr = detail_addr;
+	}
+	
+	
+	
+	
+>>>>>>> minji
 	
 	
 	

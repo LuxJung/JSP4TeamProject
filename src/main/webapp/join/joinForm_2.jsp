@@ -3,61 +3,69 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+
+
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>회원가입폼</title>
-<<<<<<< HEAD
+    <meta charset="UTF-8">
+    <title>회원가입3</title>
+    <link rel="stylesheet" href="../css/layout3.css">
 </head>
 <body>
-<h1>회원가입폼</h1>
-<form action="${contextPath}/userController/addUser.do" method="post">
-	아이디:<input type="text" name="id"><br>
-	비밀번호:<input type="password" name="password"><br>
-	닉네임:<input type="text" name="nickname"><br>
-	핸드폰번호:<input type="text" name="phone_number"><br>
-	<input type="submit" value="회원가입">
-</form>
-=======
-
-
-</head>
-<body>
-<h1>회원가입폼</h1>
-<form name="joinForm" action="${contextPath}/logintest.do" method="post" enctype="multipart/form-data">
-	아이디:<input type="text" name="id" class="input_id" required><input type="button" value="중복확인" class="overlap"><br>
-	<font id ="checkId" size="2"></font><br>
-	비밀번호:<input type="password" name="password" id="pwd1" required>
-	<font id ="pwdtext" size="2"></font><br>
-	비밀번호확인:<input type="password" name="password" id="pwd2" required>
-	<font id ="pwdChk" size="2"></font><br>
-	닉네임:<input type="text" name="nickname" class="input_nickname" required>
-	<font id ="checkNickname" size="2"></font><br>
-	핸드폰번호:<input type="text" name="phone_number" placeholder="000-0000-0000" class="phone_number" required><font id ="checkphone" size="2"></font><br>
-	이메일:<input type="text" name="email" class="email">
-	<input type="button" value="이메일 전송" class="emailBtn"><br>
-	인증번호:<input type="text" name="emailConfirm" class="emailConfirm">
-	<input type="button" value="확인" class="confirmBtn">
-	<font id ="checkEmail" size="2"></font><br>
-	
-	<hr>
-	주소:<input type="text" id="address_kakao" name="addr" readonly/><br>
-	상세주소:<input type="text" name="detail_addr" class="detail_addr" /><br>
-	
-	<img id="preview" />
-	프로필 사진:<input type="file" name="profile_img" onchange="readURL(this)" /><br>
-
-	 
-	 
-	<input type="submit" value="회원가입">
-</form>
+<div id="join_container">
+    
+    <p id="logo" style=" margin:20px auto;width:250px;height:250px;">
+    <img src="../img/logo_green.png"  alt="#" style="width:250px;height:250px;"></p>
+    <h3>회원가입</h3>
+    
+        <form action="${contextPath}/logintest.do" method="post" id="join" enctype="multipart/form-data">
+            <fieldset class="join1">
+                <legend>필수 입력 항목</legend>
+                <p class="box_i"><label for="u_name"> 아이디</label><input type="text" name="id" id="u_name" class="input_id" autocomplete="off" required><input type="button" value="중복확인" class="zip_btn overlap"></p>
+                <p id ="checkId"></p>
+                <p class="box_i"><label for="pwd1"> 비밀번호</label><input type="password" name="password" id="pwd1" autocomplete="off" required></p>
+                <p id ="pwdtext"></p>
+                <p class="box_i"><label for="pwd2"> 비밀번호 확인</label><input type="password" name="password" id="pwd2" autocomplete="off" required></p>
+                <p id ="pwdChk"></p>
+                <p class="box_i"><label for="u_id"> 닉네임</label><input type="text" class="input_nickname" id="u_id" name="nickname" autocomplete="off" required></p>
+                <p id ="checkNickname"></p>
+                <p class="box_i"><label for="u_id"> 휴대폰번호</label><input type="text" class="phone_number" id="u_id" name="phone_number" autocomplete="off" required></p>
+                <p id ="checkphone"></p>
+                <p class="box_i"><label for="u_id"> 이메일주소</label><input type="text" class="email" id="u_id" name="email" autocomplete="off" required><input type="button" value="메일전송" class="zip_btn emailBtn"></p>
+                <p id ="checkId"></p>
+                <p class="box_i"><label for="u_id"> 인증번호</label><input type="text" id="u_id" class="emailConfirm" name="emailConfirm" autocomplete="off" required><input type="button" value="번호인증" class="zip_btn confirmBtn"></p>
+                <p id ="checkEmail"></p>
+            </fieldset>
+            
+            <fieldset class="join1">
+                <legend>선택 입력 항목</legend>
+                <p class="box_i"><label for="u_name"> 주소</label><input style="width:200px;" type="text" id="address_kakao" name="addr" readonly autocomplete="off"/></p>
+                <p class="box_i"><label for="u_name"> 상세주소</label><input style="width:200px;" type="text" name="detail_addr" class="detail_addr" autocomplete="off"/></p>
+                <p id="profile_picture"><img id="preview" style="width:200px;
+    height:200px;
+	margin-left:120px;
+	display:none;
+	border-radius:50%;
+	"/></p>
+                <p class="box_i"><label for="u_name"> 프로필사진</label><input type="file" id="u_name" name="profile_img" onchange="readURL(this)" /></p>
+          
+                
+            </fieldset>
+            <p class="btn">
+                <input class="final" type="submit" value="회원가입">
+                <input class="final" type="reset" value="다시작성">
+            </p>
+        </form>   
+      
+</div> 
 
 
 
 <script src = "../js/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
 
 //프로필사진 미리보기
 function readURL(input) {
@@ -67,6 +75,8 @@ function readURL(input) {
       document.getElementById('preview').src = e.target.result;
     };
     reader.readAsDataURL(input.files[0]);
+    document.getElementById("preview").style.display = 'block';
+    
   } else {
     document.getElementById('preview').src = "";
   }
@@ -84,7 +94,6 @@ window.onload = function(){
         }).open();
     });
 }
-
 
 //핸드폰번호 정규식
 $('.phone_number').keyup(function(){
@@ -238,6 +247,8 @@ $('.input_nickname').keyup(function(){
 
  
 </script>
->>>>>>> minji
+
+
+  
 </body>
 </html>

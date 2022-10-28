@@ -8,52 +8,46 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입폼</title>
-<<<<<<< HEAD
+<link rel="stylesheet" type="text/css" href="../resource/css/bootstrap.css">
+<script type="text/javascript" src="../resource/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="../resource/js/bootstrap.min.js"></script>
+<style>
+.formwrap{
+	width:600px;
+	height:1000px;
+	margin:50px auto;
+	border:1px solid red;
+}
+
+.img_wrap{
+	width:250px;
+	height:250px;
+	border:1px solid blue;
+	margin:0 auto;
+}
+
+</style>
 </head>
 <body>
-<h1>회원가입폼</h1>
-<form action="${contextPath}/userController/addUser.do" method="post">
-	아이디:<input type="text" name="id"><br>
-	비밀번호:<input type="password" name="password"><br>
-	닉네임:<input type="text" name="nickname"><br>
-	핸드폰번호:<input type="text" name="phone_number"><br>
-	<input type="submit" value="회원가입">
+<div class="formwrap">
+<div class="img_wrap">
+<a href="#"><img src="../img/logo_green.png" width="250px" height="250px"/></a>
+</div>
+<form class="row g-3">
+  <div class="col-md-4">
+    <label for="validationDefault01" class="form-label">First name</label>
+    <input type="text" class="form-control" id="validationDefault01" value="Mark" required>
+  </div>
+  <div class="col-md-4">
+    <label for="validationDefault02" class="form-label">Last name</label>
+    <input type="text" class="form-control" id="validationDefault02" value="Otto" required>
+  </div>
+  
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </div>
 </form>
-=======
-
-
-</head>
-<body>
-<h1>회원가입폼</h1>
-<form name="joinForm" action="${contextPath}/logintest.do" method="post" enctype="multipart/form-data">
-	아이디:<input type="text" name="id" class="input_id" required><input type="button" value="중복확인" class="overlap"><br>
-	<font id ="checkId" size="2"></font><br>
-	비밀번호:<input type="password" name="password" id="pwd1" required>
-	<font id ="pwdtext" size="2"></font><br>
-	비밀번호확인:<input type="password" name="password" id="pwd2" required>
-	<font id ="pwdChk" size="2"></font><br>
-	닉네임:<input type="text" name="nickname" class="input_nickname" required>
-	<font id ="checkNickname" size="2"></font><br>
-	핸드폰번호:<input type="text" name="phone_number" placeholder="000-0000-0000" class="phone_number" required><font id ="checkphone" size="2"></font><br>
-	이메일:<input type="text" name="email" class="email">
-	<input type="button" value="이메일 전송" class="emailBtn"><br>
-	인증번호:<input type="text" name="emailConfirm" class="emailConfirm">
-	<input type="button" value="확인" class="confirmBtn">
-	<font id ="checkEmail" size="2"></font><br>
-	
-	<hr>
-	주소:<input type="text" id="address_kakao" name="addr" readonly/><br>
-	상세주소:<input type="text" name="detail_addr" class="detail_addr" /><br>
-	
-	<img id="preview" />
-	프로필 사진:<input type="file" name="profile_img" onchange="readURL(this)" /><br>
-
-	 
-	 
-	<input type="submit" value="회원가입">
-</form>
-
-
+</div>
 
 <script src = "../js/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -120,6 +114,8 @@ $('.confirmBtn').click(function(){
 			}else{
 				alert('번호가 일치하지 않습니다. 다시 입력해주세요.')
 				$('.emailConfirm').focus();
+				//$('#checkEmail').text('실패.');
+				//$('#checkEmail').attr('color','red');
 			}
 		},
 		error:function(request,status,error){        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);       }
@@ -238,6 +234,5 @@ $('.input_nickname').keyup(function(){
 
  
 </script>
->>>>>>> minji
 </body>
 </html>

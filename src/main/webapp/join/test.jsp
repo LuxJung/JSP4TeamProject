@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    Object sessionid=session.getAttribute("sessionID");
+	out.print(sessionid);
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +12,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-<<<<<<< HEAD
-	session.removeAttribute("id");//세  션제거
-=======
-	session.removeAttribute("sessionID");//세션제거
->>>>>>> minji
-	response.sendRedirect("../index/main.jsp");
-%>
+
 </body>
 </html>
