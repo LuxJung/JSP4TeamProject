@@ -10,11 +10,16 @@ public class UserVO {
 	private String addr;
 	private String detail_addr;
 	
+	public UserVO() {
+		
+	}
+	
 	public UserVO(String id, String password, String nickname, String phone_number,String profile_img,String addr,String detail_addr) {
 		this.id = id;
 		this.password = password;
 		this.nickname = nickname;
 		this.phone_number = phone_number;
+		this.profile_img = profile_img;
 		this.addr=addr;
 		this.detail_addr=detail_addr;
 	}

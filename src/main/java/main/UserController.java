@@ -64,15 +64,14 @@ public class UserController extends HttpServlet {
 			
 			UserVO userVO = new UserVO(id, password, nickname, phone_number,profile_img,addr,detail_addr);
 			userDAO.addMember(userVO);
-			nextPage="../index/main.jsp";
+			nextPage="../index/index.jsp";
 			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 			dispatch.forward(request, response);
 			
 		}else if(action.equals("/login.do")) {
 			String id=request.getParameter("id");
 			String password=request.getParameter("password");
-			String checkbox=request.getParameter("checkbox");
-			
+			String loginChk = request.getParameter("loginChk");
 			
 			System.out.println(id);
 			System.out.println(password);
@@ -81,17 +80,38 @@ public class UserController extends HttpServlet {
 			System.out.println(loginResult);
 			
 			if(loginResult==1) {
+				System.out.println("로그인 성공");
+				
 				request.setAttribute("loginResult", loginResult);
 				HttpSession session = request.getSession();
 				session.setAttribute("sessionID", id);
 				session.setMaxInactiveInterval(20*60);
-//	            response.sendRedirect(request.getContextPath()+"/");
+				UserVO userInfo=userDAO.readUser(id);
+				
+				 if(loginChk != null){
+		                Cookie cookie = new Cookie("id", id);
+		                
+		                cookie.setMaxAge(60);
+		                cookie.setPath("/");
+		                response.addCookie(cookie);
+		            }
+				 
+				 session.setAttribute("userInfo", userInfo);
+				 String picname=userInfo.getProfile_img();
+				 Cookie cookie2 = new Cookie("picname", picname);
+				 cookie2.setMaxAge(60);
+	                cookie2.setPath("/");
+	                response.addCookie(cookie2);
+				 System.out.println(userInfo.getProfile_img());
+				 
+				 
 				
 				System.out.println(session.getAttribute("sessionID"));
-				nextPage="../index/main.jsp";
+				nextPage="../index/index.jsp";
 			}else {
+				System.out.println("로그인실패");
 				request.setAttribute("loginResult", loginResult);
-				nextPage="../login/loginForm.jsp";
+				nextPage="../login/loginForm_.jsp";
 			}
 			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 			dispatch.forward(request, response);
@@ -174,8 +194,29 @@ public class UserController extends HttpServlet {
 			}
 			out.write(numberChk+"");
 			System.out.println("numberChk="+numberChk);
-		}else if(action.equals("/fileupload.do")) {
+		}else if(action.equals("/logout.do")) {
+			//request.getSession().invalidate();
+			//HttpSession session=request.getSession();
 			
+			 Cookie[] cookies = request.getCookies();
+			    if(cookies!=null){
+			        for(Cookie tempCookie : cookies){
+			            if(tempCookie.getName().equals("id")){
+			                tempCookie.setMaxAge(0);
+			                tempCookie.setPath("/");
+			                response.addCookie(tempCookie);
+			                
+			            }
+			        }
+			    }
+			    
+			    request.getSession().removeAttribute("sessionID");//세션제거
+				response.sendRedirect("../index/index.jsp");
+				
+		}else if(action.equals("/kakaologin.do")) {
+			System.out.println("카카오로그인컨트롤러접근");
+			System.out.println(request.getParameter("email"));
+			System.out.println(request.getParameter("nickname"));
 		}
 		
 	}

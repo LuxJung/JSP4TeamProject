@@ -3,14 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>로그인폼</title>
+
+
+
+
 </head>
 <body>
-<h2>로그인 페이지</h2>
 
 <!-- 쿠키값으로 id정보 받아오기 -->
 
@@ -20,11 +25,12 @@
 </c:if>
 
 <form action="${contextPath}/userController/login.do" method="post">
-	아이디:<input type="text" name="id"><br>
+	아이디:<input type="text" name="id" id="userId" autocomplete="off"><br>
 	비밀번호:<input type="password" name="password"><br>
-	<!--  <input name="checkbox" type="checkbox">id저장<br>-->
+	<input name="checkId" type="checkbox" id="idSaveCheck">id저장<br>
 	<input type="submit" value="로그인">
-
 </form>
+
+
 </body>
 </html>

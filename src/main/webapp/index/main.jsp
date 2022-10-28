@@ -14,9 +14,6 @@
 <%
 	if(session.getAttribute("sessionID")!=null){
 	
-	//세션 테스트용
-	Object sessionid=session.getAttribute("sessionID");
-	out.print(sessionid);
 %>
 
 

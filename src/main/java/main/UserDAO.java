@@ -1,11 +1,9 @@
 package main;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -64,6 +62,8 @@ public class UserDAO {
 	
 	
 	public void addMember(UserVO u) {
+		
+		System.out.println("다오접근");
 		try {
 			conn = dataFactory.getConnection();
 			String id = u.getId();
@@ -73,8 +73,11 @@ public class UserDAO {
 			String profile_img = u.getProfile_img();
 			String addr = u.getAddr();
 			String detail_addr = u.getDetail_addr();
-			String query = "INSERT INTO user_T(id, password, nickname, phone_number,profile_img,addr,detail_addr   )" + " VALUES(?, ? ,? ,?,?,?,?)";
+			String query = "INSERT INTO user_T(id, password, nickname, phone_number, profile_img, addr, detail_addr)" + " VALUES(?, ? ,? ,?,?,?,?)";
 			System.out.println(query);
+			
+			System.out.println("다오id=" + id);
+			System.out.println("다오addr=" + addr);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
@@ -100,7 +103,8 @@ public class UserDAO {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			ResultSet rs=pstmt.executeQuery();
-			if(rs.next()||id.equals("")) {
+			
+		if(rs.next()) {	
 				idCheck=0; //이미 존재하는 경우, 생성 불가능
 			}else {
 				idCheck=1; //존재하지 않는 경우, 생성 가능
@@ -136,4 +140,55 @@ public class UserDAO {
 		}
 		return nickCheck;
 	}
+	
+	public UserVO readUser(String id) {
+		UserVO user = new UserVO();
+		try{
+			
+		
+		conn = dataFactory.getConnection();
+		String query="select * from user_t where id=?";
+		pstmt=conn.prepareStatement(query);
+		pstmt.setString(1, id);
+		System.out.println(query);
+		ResultSet rs=pstmt.executeQuery();
+		
+		if(rs.next()) {
+			id = rs.getString("id");
+			String password = rs.getString("password");
+			String nickname = rs.getString("nickname");
+			String phone_number = rs.getString("phone_number");
+			String profile_img = rs.getString("profile_img");
+			String addr = rs.getString("addr");
+			String detail_addr = rs.getString("detail_addr");
+			
+			System.out.println("DAO="+id);
+			System.out.println(password);
+			System.out.println(nickname);
+			System.out.println(phone_number);
+			System.out.println(profile_img);
+			System.out.println(addr);
+			System.out.println(detail_addr);
+			
+			user.setId(id);
+			user.setPwd(password);
+			user.setNickname(nickname);
+			user.setPhone_number(phone_number);
+			user.setProfile_img(profile_img);
+			user.setAddr(detail_addr);
+			user.setDetail_addr(detail_addr);
+			
+		}
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+		
+		
+	}
+	
+	
+	
+	
 }
